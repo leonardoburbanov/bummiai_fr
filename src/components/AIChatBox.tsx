@@ -52,42 +52,14 @@ export default function AIChatBox({ open, onClose }: AIChatBoxProps) {
   return (
     <div
       className={cn(
-        "bottom-0 right-0 z-10 w-full max-w-[500px] p-1 xl:right-36",
+        "bottom-0 right-0 z-10 w-full max-w-[400px] p-1 xl:right-36",
         open ? "fixed" : "hidden"
       )}
     >
       <button onClick={onClose} className="mb-1 ms-auto block">
         <XCircle size={30} />
       </button>
-      <div className="flex h-[800px] flex-col rounded border bg-background p-3 gap-3">
-        <Card>
-          <CardHeader>
-            <CardTitle>API</CardTitle>
-            <CardDescription>
-              https://api.bummiai.com/facturapp/alcechnos/chatbot/001/chat
-            </CardDescription>
-          </CardHeader>
-          <CardContent>
-            <p className="text-sm">
-              <b>Documentación:</b> https://api.bummiai.com/docs
-            </p>
-          </CardContent>
-        </Card>
-        <Card>
-          <CardHeader>
-            <CardDescription>
-              <p><b>facturapp User:</b> 100</p>
-              <p><b>facturapp Password:</b> ********</p>
-              <p><b>Fecha de actualización:</b> 2024-04-11 00:00:00</p>
-            </CardDescription>
-          </CardHeader>
-          <CardContent>
-            <p className="text-sm">
-              <b>Status:</b> Conected <ToggleRight color="#4ade80"/>
-            </p>
-            
-          </CardContent>
-        </Card>
+      <div className="flex h-[620px] flex-col rounded border bg-background p-3 gap-3">
         <div className="mt-3 h-full overflow-y-auto px-3" ref={scrollRef}>
           {/* {JSON.stringify(messages)} */}
           {messages.map((message) => (
@@ -143,11 +115,11 @@ export default function AIChatBox({ open, onClose }: AIChatBoxProps) {
                   variant="outline"
                   onClick={() => {
                     setInput(
-                      "¿Qué productos tienen alertas de abastecimiento?"
+                      "¿Qué productos tienen alertas?"
                     );
                   }}
                 >
-                  ¿Qué productos tienen alertas de abastecimiento?
+                  <p>¿Qué productos tienen alertas?</p>
                 </Button>
               </div>
             </div>
