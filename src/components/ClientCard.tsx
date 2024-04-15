@@ -27,7 +27,7 @@ export default function ClientCard({ client }: ClientCardProps) {
           <CardTitle className="text-2xl">Cliente: {client.name}</CardTitle>
           <CardDescription>
             Distribución de productos varios.
-            <p className="text-sm text-muted-foreground">1 Chatbot</p>
+            1 Chatbot
           </CardDescription>
         </CardHeader>
         <CardContent>

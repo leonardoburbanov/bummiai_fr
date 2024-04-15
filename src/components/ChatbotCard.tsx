@@ -23,7 +23,8 @@ interface ChatBotProps {
 
 export default function ChatBotCard({ chatbot }: ChatBotProps) {
   const [chatBoxOpen, setChatBoxOpen] = useState(false);
-  const [toogleTouch, setToogleTouch] = useState(false);
+  const [toogleTouch, setToogleTouch] = useState("Connect");
+  const [connection, setConnection] = useState(true);
   return (
     <>
       <Card
@@ -47,8 +48,7 @@ export default function ChatBotCard({ chatbot }: ChatBotProps) {
           <Card>
             <CardHeader>
               <CardDescription>API</CardDescription>
-              <textarea className="w-auto text-xs">
-                https://api.bummiai.com/facturapp/alcechnos/chatbot/001/chat
+              <textarea className="w-auto text-xs" defaultValue="https://api.bummiai.com/facturapp/alcechnos/chatbot/001/chat">
               </textarea>
             </CardHeader>
             <CardContent>
@@ -81,14 +81,37 @@ export default function ChatBotCard({ chatbot }: ChatBotProps) {
               type="password"
             />
             <Label htmlFor="fechaActualizacion">Fecha de actualización</Label>
-            <Input id="fechaActualizacion" disabled defaultValue={'2024-04-11 00:00:00'} />
-            <Toggle variant="outline" onClick={() => setToogleTouch(true)}>{toogleTouch}</Toggle>
+            <Input
+              id="fechaActualizacion"
+              disabled
+              defaultValue={"2024-04-11 00:00:00"}
+            />
+            <Toggle
+              variant="outline"
+              onClick={() => {
+                if (connection === true) {
+                  setToogleTouch("Disconnect");
+                  setConnection(false);
+                }else{
+                  setToogleTouch("Connect");
+                  setConnection(true);
+                }
+              }}
+            >
+              {toogleTouch}
+            </Toggle>
           </CardDescription>
         </CardHeader>
         <CardContent>
-          <div className="flex items-center">
-            <b>Status:</b> <Dot color="#4ade80" size={30} /> Conected
-          </div>
+          {/* <div className="flex items-center">
+            <b>Status:</b> <Dot color="#4ade80" size={30} /> {
+              if(connection === true){
+                setConnection(true)
+              }else{
+                setConnection(false)
+              }
+            }
+          </div> */}
         </CardContent>
       </Card>
       <AIChatBox open={chatBoxOpen} onClose={() => setChatBoxOpen(false)} />

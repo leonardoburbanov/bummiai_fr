@@ -10,10 +10,11 @@ import { useState } from "react";
 import { dark } from "@clerk/themes";
 import ThemeToggleButton from "@/components/ThemeToogleButton";
 import { useTheme } from "next-themes";
+import TableSheet from "./TableSheet";
 
 export default function NavBar() {
   const { theme } = useTheme();
-
+  const [showTable, setShowTable] = useState(false);
   return (
     <>
       <div className="p-4 shadow">
@@ -43,9 +44,11 @@ export default function NavBar() {
               <Plus size={20} className="mr-2" />
               Add Data Product
             </Button>
+            <Button onClick={()=> setShowTable(true)}>Open Table</Button>
           </div>
         </div>
       </div>
+      <TableSheet open={showTable} setOpen={setShowTable} />
     </>
   );
 }

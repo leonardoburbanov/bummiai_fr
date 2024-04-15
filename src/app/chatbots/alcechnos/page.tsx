@@ -1,5 +1,6 @@
 import ChatBotCard from "@/components/ChatbotCard";
 import { auth, currentUser } from "@clerk/nextjs";
+
 export default async function ChatbotsPage() {
   //   const { userId } = auth();
   //   const user = await currentUser();
@@ -14,16 +15,19 @@ export default async function ChatbotsPage() {
     { id: "001", name: "Facturapp AI", category: "Chatbot" },
   ];
 
+
   return (
-    <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
-      {clientChatbots.map((chatbot) => (
-        <ChatBotCard chatbot={chatbot} key={chatbot.id} />
-      ))}
-      {clientChatbots.length === 0 && (
-        <div className="col-span-full text-center">
-          {"You don't have any products. Why don't you create one?"}
-        </div>
-      )}
-    </div>
+    <>
+      <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
+        {clientChatbots.map((chatbot) => (
+          <ChatBotCard chatbot={chatbot} key={chatbot.id} />
+        ))}
+        {clientChatbots.length === 0 && (
+          <div className="col-span-full text-center">
+            {"You don't have any products. Why don't you create one?"}
+          </div>
+        )}
+      </div>
+    </>
   );
 }
