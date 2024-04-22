@@ -15,7 +15,7 @@ export default async function ChatbotsPage() {
   ];
 
   return (
-    <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3 p-">
+    <div className="m-5 grid gap-3 sm:grid-cols-2 lg:grid-cols-3 p-">
       {clients.map((client) => (
         <ClientCard client={client} key={client.id} />
       ))}

@@ -1,3 +1,4 @@
+import BIReport from "@/components/BIReport";
 import ClientCard from "@/components/ClientCard";
 import { auth, currentUser } from "@clerk/nextjs";
 export default async function CopilotsPage() {
@@ -15,15 +16,6 @@ export default async function CopilotsPage() {
   ];
 
   return (
-    <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
-      {clients.map((client) => (
-        <ClientCard client={client} key={client.id} />
-      ))}
-      {clients.length === 0 && (
-        <div className="col-span-full text-center">
-          {"You don't have any products. Why don't you create one?"}
-        </div>
-      )}
-    </div>
+      <BIReport />
   );
 }

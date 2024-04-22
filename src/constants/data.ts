@@ -27,7 +27,7 @@ export const navItems: NavItem[] = [
     },
     {
       title: "Company profile",
-      href: "/copilots/profile",
+      href: "/copilots/#",
       icon: "company",
       label: "company",
     },
