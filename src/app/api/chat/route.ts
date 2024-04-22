@@ -11,7 +11,7 @@ export async function POST(req: Request) {
         headers: {
             'Authorization': 'Bearer 83ec4f793dc9b26edbcf4be6758c391af21c2fc95eb0532e64d39104159e6998',
             'Content-Type': 'application/json',
-            "Cookie": "session=eyJ1c2VybmFtZSI6ICIxMDAiLCAiZGF0YWJhc2UiOiAiQ29ubmVjdGlvbiB0byBDb21wYW55IDIncyBEYXRhYmFzZSJ9.ZiaFvQ.jrRhN3iCEb6k3zGds_oBv6nKP5w"
+            "Cookie": "session=eyJ1c2VybmFtZSI6ICIxMDAiLCAiZGF0YWJhc2UiOiAiQ29ubmVjdGlvbiB0byBDb21wYW55IDIncyBEYXRhYmFzZSJ9.ZiaKQg.Hl5pVnAYx_a-xp1DeAg9i70Ngik"
             },
             body: JSON.stringify({'query': query}),
         });
