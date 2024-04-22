@@ -7,6 +7,7 @@ import { Message } from "ai";
 import { useUser } from "@clerk/nextjs";
 import Image from "next/image";
 import { useEffect, useRef } from "react";
+import logo from "@/assets/logo.png";
 import {
   Card,
   CardContent,
@@ -95,8 +96,14 @@ export default function AIChatBox({ open, onClose }: AIChatBoxProps) {
           )}
           {!error && messages.length === 0 && (
             <div className="flex flex-col h-full items-center justify-center gap-5">
-              <div className="flex flex-col items-center justify-center gap-5">
-                <Bot /> <p>Pregúntale a la IA sobre tus productos</p>
+              <div className="flex flex-col items-center justify-center gap-5 p-20">
+              <Image
+              src={logo}
+              alt="Bummi AI - Logo"
+              width={40}
+              height={40}
+              className="rounded-md"
+            /> <p className="text-center">Hola soy SaaS AI, tu asistente de analítica sobre tus productos, ventas o inventario. Aquí tienes algunos ejemplos de preguntas que puedes hacerme.</p>
               </div>
               <div className="flex flex-col items-center justify-center gap-2">
                 <Button
@@ -122,6 +129,14 @@ export default function AIChatBox({ open, onClose }: AIChatBoxProps) {
                   }}
                 >
                   <p>¿Qué productos tienen alertas?</p>
+                </Button>
+                <Button
+                  variant="outline"
+                  onClick={() => {
+                    setInput("¿Qué ramo tuvo más ventas en enero 2024?");
+                  }}
+                >
+                  <p>¿Qué ramo tuvo más ventas en enero 2024?</p>
                 </Button>
               </div>
             </div>
@@ -151,9 +166,10 @@ export default function AIChatBox({ open, onClose }: AIChatBoxProps) {
   );
 }
 
-import { ColumnDef } from "@tanstack/react-table"
+import { ColumnDef, Row } from "@tanstack/react-table"
 
-function markdownTableToJson(markdownTable: string): { data: any[], columns: ColumnDef<string>[] } {
+
+function markdownTableToJson(markdownTable: string): { data: any[], columns: ColumnDef<any>[] } {
   // Split the markdown table into rows
   const rows = markdownTable.split('\n');
 
@@ -164,15 +180,30 @@ function markdownTableToJson(markdownTable: string): { data: any[], columns: Col
   const jsonArray: any[] = [];
 
   // Initialize an empty array to store the columns definition
-  const columns: ColumnDef<string>[] = [];
+  const columns: ColumnDef<any>[] = [];
 
   // Iterate over each key and create a column definition
   keys.forEach(key => {
-    if (key.toLowerCase().replace(/\s+/g, '_')!=""){
-      columns.push({
-        accessorKey: key.toLowerCase().replace(/\s+/g, '_'), // Convert to lowercase and replace spaces with underscores
+    const key_name = key.toLowerCase().replace(/\s+/g, '_')
+    if (key_name!=""){
+      const new_colum = {
+        accessorKey: key_name, // Convert to lowercase and replace spaces with underscores
         header: key,
-      });
+        cell: ({ row }: { row: any }) => {
+          const key_value = parseFloat(row.getValue(key_name))
+     
+          // Format the amount as a dollar amount
+          const formatted = key.toLowerCase().includes("ventas")
+          ? new Intl.NumberFormat("en-US", {
+              style: "currency",
+              currency: "USD",
+            }).format(key_value)
+          : row.getValue(key_name).toString();
+     
+          return <div>{formatted}</div>
+        }
+      }
+      columns.push(new_colum);
     }
   });
 

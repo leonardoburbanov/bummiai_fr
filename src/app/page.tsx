@@ -1,15 +1,13 @@
+import { useEffect } from "react";
 import Image from "next/image";
 import logo from "@/assets/logo.png";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
 import { auth } from "@clerk/nextjs";
 import { redirect } from "next/navigation";
+const urlBummiBk = process.env.BUMMI_API;
 
 export default function Home() {
-  const {userId} = auth();
-
-  if (userId) redirect("/chatbots")
-  
   return (
     <main className="flex h-screen flex-col items-center justify-center gap-5">
       <div className="flex items-center gap-4">
@@ -25,11 +23,11 @@ export default function Home() {
         </span>
       </div>
       <p className="max-w-prose text-center">
-        AI & Data Components as a Service tailored for retail, e-commerce,
-        wholesale and accounting <b>embedded in your SaaS</b>.
+        AI Copilots tailored for retail, e-commerce, wholesale, and accounting{" "}
+        <b>embedded in your SaaS</b>.
       </p>
-      <Button  size='lg'  asChild>
-        <Link href="/chatbots">Open</Link>
+      <Button size="lg" asChild>
+        <Link href="/copilots/dashboard">Open</Link>
       </Button>
     </main>
   );

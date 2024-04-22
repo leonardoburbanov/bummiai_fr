@@ -9,8 +9,9 @@ export async function POST(req: Request) {
         const response = await fetch(`${urlBummiBk}/facturapp/alcechnos/chatbot/001/chat`, {
         method: 'POST',
         headers: {
-            'Cookie': 'session=eyJ1c2VybmFtZSI6ICJ1c2VyMSIsICJkYXRhYmFzZSI6ICJDb25uZWN0aW9uIHRvIENvbXBhbnkgMSdzIERhdGFiYXNlIn0=.Zh6zpA.MxvxRZkppcjqDuSNiYkKPt4jIp8',
+            'Authorization': 'Bearer 83ec4f793dc9b26edbcf4be6758c391af21c2fc95eb0532e64d39104159e6998',
             'Content-Type': 'application/json',
+            "Cookie": "session=eyJ1c2VybmFtZSI6ICIxMDAiLCAiZGF0YWJhc2UiOiAiQ29ubmVjdGlvbiB0byBDb21wYW55IDIncyBEYXRhYmFzZSJ9.ZiaFvQ.jrRhN3iCEb6k3zGds_oBv6nKP5w"
             },
             body: JSON.stringify({'query': query}),
         });

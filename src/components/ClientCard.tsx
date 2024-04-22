@@ -27,13 +27,12 @@ export default function ClientCard({ client }: ClientCardProps) {
           <CardTitle className="text-2xl">Cliente: {client.name}</CardTitle>
           <CardDescription>
             Distribución de productos varios.
-            1 Chatbot
           </CardDescription>
         </CardHeader>
         <CardContent>
           <div className="m-5 flex flex-col gap-4">
           <Button size="lg" asChild>
-              <Link href="/chatbots/alcechnos">Open</Link>
+              <Link href="/copilots/data_copilots/alcechnos">Open</Link>
             </Button>
             
           </div>

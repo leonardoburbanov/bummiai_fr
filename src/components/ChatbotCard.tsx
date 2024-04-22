@@ -25,6 +25,7 @@ export default function ChatBotCard({ chatbot }: ChatBotProps) {
   const [chatBoxOpen, setChatBoxOpen] = useState(false);
   const [toogleTouch, setToogleTouch] = useState("Connect");
   const [connection, setConnection] = useState(true);
+  
   return (
     <>
       <Card
@@ -32,7 +33,7 @@ export default function ChatBotCard({ chatbot }: ChatBotProps) {
         onClick={() => setChatBoxOpen(true)}
       >
         <CardHeader>
-          <CardTitle className="text-2xl">Chatbot: {chatbot.name}</CardTitle>
+          <CardTitle className="text-2xl">Copilot: {chatbot.name}</CardTitle>
           <CardDescription>
             Obten información sobre tus datos en Facturapp.
           </CardDescription>
@@ -48,8 +49,10 @@ export default function ChatBotCard({ chatbot }: ChatBotProps) {
           <Card>
             <CardHeader>
               <CardDescription>API</CardDescription>
-              <textarea className="w-auto text-xs" defaultValue="https://api.bummiai.com/facturapp/alcechnos/chatbot/001/chat">
-              </textarea>
+              <textarea
+                className="w-auto text-xs"
+                defaultValue="https://api.bummiai.com/facturapp/alcechnos/chatbot/001/chat"
+              ></textarea>
             </CardHeader>
             <CardContent>
               <p className="text-sm">
@@ -60,11 +63,12 @@ export default function ChatBotCard({ chatbot }: ChatBotProps) {
 
           <div className="m-5 flex flex-col gap-3">
             <Label>Token</Label>
-            <p className="text-sm text-muted-foreground">
-              eyJhbGciOiAiS2Vzc2VjciIifQ
-            </p>
+            <textarea
+              className="text-xs"
+              defaultValue="83ec4f793dc9b26edbcf4be6758c391af21c2fc95eb0532e64d39104159e6998"
+            ></textarea>
             <Button size="lg" onClick={() => setChatBoxOpen(true)}>
-              Probar
+              Chatear
             </Button>
           </div>
         </CardContent>
@@ -86,20 +90,20 @@ export default function ChatBotCard({ chatbot }: ChatBotProps) {
               disabled
               defaultValue={"2024-04-11 00:00:00"}
             />
-            <Toggle
+            {/* <Toggle
               variant="outline"
               onClick={() => {
                 if (connection === true) {
                   setToogleTouch("Disconnect");
                   setConnection(false);
-                }else{
+                } else {
                   setToogleTouch("Connect");
                   setConnection(true);
                 }
               }}
             >
               {toogleTouch}
-            </Toggle>
+            </Toggle> */}
           </CardDescription>
         </CardHeader>
         <CardContent>
