@@ -63,7 +63,7 @@ export default function AIChatBox({ open, onClose }: AIChatBoxProps) {
       <button onClick={onClose} className="mb-1 ms-auto block">
         <XCircle size={30} />
       </button>
-      <div className="flex h-[820px] flex-col rounded border bg-background p-3 gap-3">
+      <div className="flex h-[620px] flex-col rounded border bg-background p-3 gap-3">
         <div className="mt-3 h-full overflow-y-auto px-3" ref={scrollRef}>
           {/* {JSON.stringify(messages)} */}
           {messages.map((message) => (
@@ -167,6 +167,7 @@ export default function AIChatBox({ open, onClose }: AIChatBoxProps) {
 }
 
 import { ColumnDef, Row } from "@tanstack/react-table"
+import { DataCards } from "./data-cards";
 
 
 function markdownTableToJson(markdownTable: string): { data: any[], columns: ColumnDef<any>[] } {
@@ -238,7 +239,6 @@ function ChatMessage({
   let contentData: any
   if(isTableFlag){
     contentData = markdownTableToJson(content)
-    console.log(contentData)
   }
   
   return (
@@ -250,7 +250,8 @@ function ChatMessage({
     >
       {isAiMessage && <Bot className="mr-2 shrink-0" />}
       {isTableFlag ? (
-        <DataTable columns={contentData.columns} data={contentData.data}/>
+        //<DataTable columns={contentData.columns} data={contentData.data}/>
+        <DataCards columns={contentData.columns} data={contentData.data} />
       ) : (
         <p
           className={cn(
