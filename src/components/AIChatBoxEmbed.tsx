@@ -61,7 +61,7 @@ export default function AIChatBoxEmbed({ open, onClose }: AIChatBoxEmbedProps) {
 
   return (
     <div className="flex flex-row justify-center">
-      <div className="flex flex-col lg:w-[320px]">
+      <div className="flex flex-col w-[320px]">
         <div className="flex h-[650px] flex-col rounded border bg-background p-3 gap-3">
           <div className="mt-3 h-full overflow-y-auto px-3" ref={scrollRef}>
             {/* {JSON.stringify(messages)} */}
