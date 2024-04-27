@@ -170,12 +170,23 @@ import { ColumnDef, Row } from "@tanstack/react-table"
 import { DataCards } from "./data-cards";
 
 
-function markdownTableToJson(markdownTable: string): { data: any[], columns: ColumnDef<any>[] } {
+function markdownTableToJson(markdownTable: string): {
+  data: any[];
+  columns: ColumnDef<any>[];
+  explanation: string
+} {
   // Split the markdown table into rows
-  const rows = markdownTable.split('\n');
+  const explanation = markdownTable.split("|")[0]
+  const pre_rows = '|'+ markdownTable.split("|").slice(1).join('|')
+  const rows = pre_rows.split("\n");
+  console.log(rows)
 
   // Extract the keys from the first row
-  const keys = rows.shift()?.split('|').map(key => key.trim()) || [];
+  const keys =
+    rows
+      .shift()
+      ?.split("|")
+      .map((key) => key.trim()) || [];
 
   // Initialize an empty array to store the JSON objects
   const jsonArray: any[] = [];
@@ -184,47 +195,57 @@ function markdownTableToJson(markdownTable: string): { data: any[], columns: Col
   const columns: ColumnDef<any>[] = [];
 
   // Iterate over each key and create a column definition
-  keys.forEach(key => {
-    const key_name = key.toLowerCase().replace(/\s+/g, '_')
-    if (key_name!=""){
-      const new_colum = {
-        accessorKey: key_name, // Convert to lowercase and replace spaces with underscores
-        header: key,
-        cell: ({ row }: { row: any }) => {
-          const key_value = parseFloat(row.getValue(key_name))
-     
-          // Format the amount as a dollar amount
-          const formatted = key.toLowerCase().includes("ventas")
-          ? new Intl.NumberFormat("en-US", {
-              style: "currency",
-              currency: "USD",
-            }).format(key_value)
-          : row.getValue(key_name).toString();
-     
-          return <div>{formatted}</div>
-        }
+  keys.forEach((key, index) => {
+    let key_name = key;
+    if (index != 0) {
+      console.log(index);
+      console.log(key);
+      key_name = key.toLowerCase().replace(/\s+/g, "_");
+      if (key_name != "") {
+        const new_colum = {
+          accessorKey: key_name, // Convert to lowercase and replace spaces with underscores
+          header: key,
+          cell: ({ row }: { row: any }) => {
+            const key_value = parseFloat(row.getValue(key_name));
+
+            // Format the amount as a dollar amount
+            const formatted = key.toLowerCase().includes("ventas")
+              ? new Intl.NumberFormat("en-US", {
+                  style: "currency",
+                  currency: "USD",
+                }).format(key_value)
+              : row.getValue(key_name).toString();
+
+            return <div>{formatted}</div>;
+          },
+        };
+        columns.push(new_colum);
       }
-      columns.push(new_colum);
     }
   });
 
   // Iterate over each row and convert it to JSON
-  rows.forEach(row => {
-    const columns = row.split('|').map(col => col.trim());
+  rows.forEach((row) => {
+    const columns = row.split("|").map((col) => col.trim());
 
     // Create the JSON object using the extracted keys
     const jsonObject: any = {};
     keys.forEach((key, index) => {
-      jsonObject[key.toLowerCase().replace(/\s+/g, '_')] = columns[index];
+      jsonObject[key.toLowerCase().replace(/\s+/g, "_")] = columns[index];
     });
 
     jsonArray.push(jsonObject);
   });
 
   // Filter out rows with separator lines (assuming separator starts with '------')
-  const filteredArray = jsonArray.filter(item => !Object.values(item).some((value: any) => value.toString().startsWith('------')));
+  const filteredArray = jsonArray.filter(
+    (item) =>
+      !Object.values(item).some((value: any) =>
+        value.toString().startsWith("------")
+      )
+  );
 
-  return { data: filteredArray, columns };
+  return { data: filteredArray, columns, explanation: explanation };
 }
 
 

@@ -187,9 +187,13 @@ import { DataCards } from "./data-cards";
 function markdownTableToJson(markdownTable: string): {
   data: any[];
   columns: ColumnDef<any>[];
+  explanation: string;
 } {
   // Split the markdown table into rows
-  const rows = markdownTable.split("\n");
+  const explanation = markdownTable.split("|")[0];
+  const pre_rows = "|" + markdownTable.split("|").slice(1).join("|");
+  const rows = pre_rows.split("\n");
+  console.log(rows);
 
   // Extract the keys from the first row
   const keys =
@@ -205,27 +209,32 @@ function markdownTableToJson(markdownTable: string): {
   const columns: ColumnDef<any>[] = [];
 
   // Iterate over each key and create a column definition
-  keys.forEach((key) => {
-    const key_name = key.toLowerCase().replace(/\s+/g, "_");
-    if (key_name != "") {
-      const new_colum = {
-        accessorKey: key_name, // Convert to lowercase and replace spaces with underscores
-        header: key,
-        cell: ({ row }: { row: any }) => {
-          const key_value = parseFloat(row.getValue(key_name));
+  keys.forEach((key, index) => {
+    let key_name = key;
+    if (index != 0) {
+      console.log(index);
+      console.log(key);
+      key_name = key.toLowerCase().replace(/\s+/g, "_");
+      if (key_name != "") {
+        const new_colum = {
+          accessorKey: key_name, // Convert to lowercase and replace spaces with underscores
+          header: key,
+          cell: ({ row }: { row: any }) => {
+            const key_value = parseFloat(row.getValue(key_name));
 
-          // Format the amount as a dollar amount
-          const formatted = key.toLowerCase().includes("ventas")
-            ? new Intl.NumberFormat("en-US", {
-                style: "currency",
-                currency: "USD",
-              }).format(key_value)
-            : row.getValue(key_name).toString();
+            // Format the amount as a dollar amount
+            const formatted = key.toLowerCase().includes("ventas")
+              ? new Intl.NumberFormat("en-US", {
+                  style: "currency",
+                  currency: "USD",
+                }).format(key_value)
+              : row.getValue(key_name).toString();
 
-          return <div>{formatted}</div>;
-        },
-      };
-      columns.push(new_colum);
+            return <div>{formatted}</div>;
+          },
+        };
+        columns.push(new_colum);
+      }
     }
   });
 
@@ -250,7 +259,7 @@ function markdownTableToJson(markdownTable: string): {
       )
   );
 
-  return { data: filteredArray, columns };
+  return { data: filteredArray, columns, explanation };
 }
 
 function ChatMessage({
@@ -263,6 +272,7 @@ function ChatMessage({
   const isTableFlag = content.includes("----------");
   let contentData: any;
   if (isTableFlag) {
+    console.log(content);
     contentData = markdownTableToJson(content);
   }
 
@@ -274,9 +284,17 @@ function ChatMessage({
       )}
     >
       {isAiMessage && <Bot className="mr-2 shrink-0" />}
+
       {isTableFlag ? (
         // <DataTable columns={contentData.columns} data={contentData.data} />
+        <>
+        <div className="flex flex-col">
+        <p className="text">{contentData.explanation}</p>
         <DataCards columns={contentData.columns} data={contentData.data} />
+        </div>
+          
+
+        </>
       ) : (
         <p
           className={cn(
