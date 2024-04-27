@@ -13,6 +13,7 @@ interface EmdedParams {
 export default function ChatbotsPage() {
   const {reportId} = useParams<EmdedParams>();
   const decodedReportId = decodeURIComponent(reportId);
+  console.log(decodedReportId)
   return (
           <div>
             {/* <h1>Embedded Report</h1>
