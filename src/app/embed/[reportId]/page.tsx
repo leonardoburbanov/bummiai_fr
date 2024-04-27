@@ -19,9 +19,9 @@ export default function ChatbotsPage() {
             {/* <h1>Embedded Report</h1>
             <p>Report ID: {reportId}</p> */}
             {/* Add your embedded content here */}
-            {decodedReportId=='ZekGR+2fIzkSJOVTjaRIlHCXRxk=' &&
+            {decodedReportId=='ZekGR 2fIzkSJOVTjaRIlHCXRxk=' &&
             (<AIChatBoxEmbed open={true} onClose={() => true} />)}
-            {decodedReportId!='ZekGR+2fIzkSJOVTjaRIlHCXRxk=' &&
+            {decodedReportId!='ZekGR 2fIzkSJOVTjaRIlHCXRxk=' &&
             (<p>The report with Id: {decodedReportId} does not exist</p>)}
         </div>
   );
