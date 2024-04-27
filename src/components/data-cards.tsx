@@ -27,7 +27,7 @@ export function DataCards<TData, TValue>({
         {dataArray.map((item, index) => (
           <CarouselItem key={item.id}>
             <div className="p-1">
-              <Card className="h-[200px] w-[190px]">
+              <Card className="h-[250px] w-[190px]">
                 <CardContent>
                   {/* Existing card content logic here */}
                   {Object.entries(item)
