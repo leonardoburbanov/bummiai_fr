@@ -22,12 +22,12 @@ export function DataCards<TData, TValue>({
     return { id: index + 1, ...obj };
   });
   return (
-    <Carousel className="w-full max-w-xs">
+    <Carousel className="w-full w-[200px]">
       <CarouselContent>
         {dataArray.map((item, index) => (
           <CarouselItem key={item.id}>
             <div className="p-1">
-              <Card className="h-[200px] w-[230px]">
+              <Card className="h-[200px] w-[190px]">
                 <CardContent>
                   {/* Existing card content logic here */}
                   {Object.entries(item)

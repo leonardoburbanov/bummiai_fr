@@ -283,13 +283,13 @@ function ChatMessage({
         isAiMessage ? "me5 justify-start" : "ms-5 justify-end"
       )}
     >
-      {isAiMessage && <Bot className="mr-2 shrink-0" />}
+      {isAiMessage && <Bot className="mr-2 mb-56 shrink-0" />}
 
       {isTableFlag ? (
         // <DataTable columns={contentData.columns} data={contentData.data} />
         <>
         <div className="flex flex-col">
-        <p className="text">{contentData.explanation}</p>
+        <p className="text mb-4">{contentData.explanation}</p>
         <DataCards columns={contentData.columns} data={contentData.data} />
         </div>
           
@@ -311,7 +311,7 @@ function ChatMessage({
           alt="User image"
           width={40}
           height={40}
-          className="ml-2 h-10 w-10 rounded-full object-cover"
+          className="ml-2 mb-20 h-10 w-10 rounded-full object-cover"
         />
       )}
     </div>
