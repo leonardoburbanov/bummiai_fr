@@ -60,122 +60,120 @@ export default function AIChatBoxEmbed({ open, onClose }: AIChatBoxEmbedProps) {
   const lastMessageIsUser = messages[messages.length - 1]?.role === "user";
 
   return (
-    <div className="flex flex-row justify-center">
-      <div className="flex flex-col w-[320px]">
-        <div className="flex h-[650px] flex-col rounded border bg-background p-3 gap-3">
-          <div className="mt-3 h-full overflow-y-auto px-3" ref={scrollRef}>
-            {/* {JSON.stringify(messages)} */}
-            {messages.map((message) => (
-              //   <div key={message.id}>
-              //   <p>{message.content}</p>
-              <ChatMessage
-                message={{
-                  role: message.role,
-                  //content: message.content.replace(/"([^"]+)"/g, "$1"),
-                  content: message.content,
-                }}
-                key={message.id}
-              />
-            ))}
-            {isLoading && lastMessageIsUser && (
-              <ChatMessage
-                message={{
-                  role: "assistant",
-                  content: "Thinking...",
-                }}
-              />
-            )}
-            {error && (
-              <ChatMessage
-                message={{
-                  role: "assistant",
-                  content: "Something went wrong please try again...",
-                }}
-              />
-            )}
-            {!error && messages.length === 0 && (
-              <div className="flex flex-col h-full items-center justify-start gap-5">
-                <div className="flex flex-col items-center justify-center p-5 gap-5">
-                  <Image
-                    src={logo}
-                    alt="Bummi AI - Logo"
-                    width={40}
-                    height={40}
-                    className="rounded-md"
-                  />{" "}
-                  <p className="text-center text-sm">
-                    Hola soy SaaS AI, tu asistente de analítica sobre tus
-                    productos, ventas o inventario. Aquí tienes algunos ejemplos
-                    de preguntas que puedes hacerme.
-                  </p>
-                </div>
-                <div className="flex flex-col items-center justify-center gap-2 w-[320]">
-                  <div className="w-[300]">
-                    <Button
-                      variant="outline"
-                      onClick={() => {
-                        setInput("¿Cuáles son los 10 productos más vendidos?");
-                      }}
-                      size="lg"
-                      className="w-72 h-16 text-wrap overflow-hidden text-ellipsis"
-                    >
-                      ¿Cuáles son los 10 productos más vendidos?
-                    </Button>
-                  </div>
-                  <Button
-                    variant="outline"
-                    onClick={() => {
-                      setInput("¿Cuáles son los 10 productos de mayor stock?");
-                    }}
-                    size="lg"
-                    className="w-72 h-16 text-wrap overflow-hidden text-ellipsis"
-                  >
-                    ¿Cuáles son los 10 productos de mayor stock?
-                  </Button>
-                  <Button
-                    variant="outline"
-                    onClick={() => {
-                      setInput("¿Qué productos tienen alertas?");
-                    }}
-                    size="lg"
-                    className="w-72 h-16 text-wrap overflow-hidden text-ellipsis"
-                  >
-                    <p>¿Qué productos tienen alertas?</p>
-                  </Button>
-                  <Button
-                    variant="outline"
-                    onClick={() => {
-                      setInput("¿Qué ramo tuvo más ventas en enero 2024?");
-                    }}
-                    size="lg"
-                    className="w-72 h-16 text-wrap overflow-hidden text-ellipsis"
-                  >
-                    <p>¿Qué ramo tuvo más ventas en enero 2024?</p>
-                  </Button>
-                </div>
-              </div>
-            )}
-          </div>
-          <form onSubmit={handleSubmit} className="m-3 flex gap-3">
-            <Button
-              title="Clear chat"
-              variant="outline"
-              size="icon"
-              className="shrink-0"
-              type="button"
-              onClick={() => setMessages([])}
-            >
-              <Trash width={15} height={15} />
-            </Button>
-            <Input
-              value={input}
-              onChange={handleInputChange}
-              placeholder="Pregunta algo..."
-              ref={inputRef}
+    <div className="flex flex-row h-screen">
+      <div className="flex flex-col w-screen h-full justify-between rounded border bg-background p-3">
+        <div className="mt-3 overflow-y-auto px-3" ref={scrollRef}>
+          {/* {JSON.stringify(messages)} */}
+          {messages.map((message) => (
+            //   <div key={message.id}>
+            //   <p>{message.content}</p>
+            <ChatMessage
+              message={{
+                role: message.role,
+                //content: message.content.replace(/"([^"]+)"/g, "$1"),
+                content: message.content,
+              }}
+              key={message.id}
             />
-            <Button type="submit">Send</Button>
-          </form>
+          ))}
+          {isLoading && lastMessageIsUser && (
+            <ChatMessage
+              message={{
+                role: "assistant",
+                content: "Thinking...",
+              }}
+            />
+          )}
+          {error && (
+            <ChatMessage
+              message={{
+                role: "assistant",
+                content: "Something went wrong please try again...",
+              }}
+            />
+          )}
+          {!error && messages.length === 0 && (
+            <div className="flex flex-col h-full items-center justify-start gap-5">
+              <div className="flex flex-col items-center justify-center p-5 gap-5">
+                <Image
+                  src={logo}
+                  alt="Bummi AI - Logo"
+                  width={40}
+                  height={40}
+                  className="rounded-md"
+                />{" "}
+                <p className="text-center text-sm">
+                  Hola soy SaaS AI, tu asistente de analítica sobre tus
+                  productos, ventas o inventario. Aquí tienes algunos ejemplos
+                  de preguntas que puedes hacerme.
+                </p>
+              </div>
+              <div className="flex flex-col items-center justify-center gap-2 w-[320]">
+                <div className="w-[300]">
+                  <Button
+                    variant="outline"
+                    onClick={() => {
+                      setInput("¿Cuáles son los 10 productos más vendidos?");
+                    }}
+                    size="lg"
+                    className="w-72 h-16 text-wrap overflow-hidden text-ellipsis"
+                  >
+                    ¿Cuáles son los 10 productos más vendidos?
+                  </Button>
+                </div>
+                <Button
+                  variant="outline"
+                  onClick={() => {
+                    setInput("¿Cuáles son los 10 productos de mayor stock?");
+                  }}
+                  size="lg"
+                  className="w-72 h-16 text-wrap overflow-hidden text-ellipsis"
+                >
+                  ¿Cuáles son los 10 productos de mayor stock?
+                </Button>
+                <Button
+                  variant="outline"
+                  onClick={() => {
+                    setInput("¿Qué productos tienen alertas?");
+                  }}
+                  size="lg"
+                  className="w-72 h-16 text-wrap overflow-hidden text-ellipsis"
+                >
+                  <p>¿Qué productos tienen alertas?</p>
+                </Button>
+                <Button
+                  variant="outline"
+                  onClick={() => {
+                    setInput("¿Qué ramo tuvo más ventas en enero 2024?");
+                  }}
+                  size="lg"
+                  className="w-72 h-16 text-wrap overflow-hidden text-ellipsis"
+                >
+                  <p>¿Qué ramo tuvo más ventas en enero 2024?</p>
+                </Button>
+              </div>
+            </div>
+          )}
         </div>
+        <form onSubmit={handleSubmit} className="m-3 flex gap-3">
+          <Button
+            title="Clear chat"
+            variant="outline"
+            size="icon"
+            className="shrink-0"
+            type="button"
+            onClick={() => setMessages([])}
+          >
+            <Trash width={15} height={15} />
+          </Button>
+          <Input
+            value={input}
+            onChange={handleInputChange}
+            placeholder="Pregunta algo..."
+            ref={inputRef}
+          />
+          <Button type="submit">Send</Button>
+        </form>
       </div>
     </div>
   );
@@ -288,12 +286,10 @@ function ChatMessage({
       {isTableFlag ? (
         // <DataTable columns={contentData.columns} data={contentData.data} />
         <>
-        <div className="flex flex-col">
-        <p className="text mb-4">{contentData.explanation}</p>
-        <DataCards columns={contentData.columns} data={contentData.data} />
-        </div>
-          
-
+          <div className="flex flex-col">
+            <p className="text mb-4">{contentData.explanation}</p>
+            <DataCards columns={contentData.columns} data={contentData.data} />
+          </div>
         </>
       ) : (
         <p
