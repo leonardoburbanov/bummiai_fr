@@ -24,6 +24,8 @@ import {
 } from "./ui/card";
 import { DataTable } from "./data-table";
 import { Product, product_columns } from "@/app/chatbots/alcechnos/columns";
+import { ColumnDef, Row } from "@tanstack/react-table";
+import { DataCards } from "./data-cards";
 
 interface AIChatBoxEmbedProps {
   open: boolean;
@@ -178,9 +180,6 @@ export default function AIChatBoxEmbed({ open, onClose }: AIChatBoxEmbedProps) {
     </div>
   );
 }
-
-import { ColumnDef, Row } from "@tanstack/react-table";
-import { DataCards } from "./data-cards";
 
 function markdownTableToJson(markdownTable: string): {
   data: any[];

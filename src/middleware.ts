@@ -6,7 +6,7 @@ export default authMiddleware({
   // Allow signed out users to access the specified routes:
   // publicRoutes: ['/anyone-can-visit-this-route'],
   publicRoutes: ["/"],
-  ignoredRoutes: ['/embed/[reportId]'],
+  ignoredRoutes: ['/embed/ZekGR%202fIzkSJOVTjaRIlHCXRxk%3D'],
 });
 
 export const config = {
